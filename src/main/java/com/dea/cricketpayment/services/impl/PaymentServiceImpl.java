@@ -11,6 +11,7 @@ import com.dea.cricketpayment.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 @Service
@@ -29,6 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public HashMap<String, Double> doPayment(PaymentDto paymentDto){
         HashMap<String, Double> map = new HashMap<>();
+        DecimalFormat df = new DecimalFormat("###.##");
 
         PaymentHistory paymentHistory = new PaymentHistory();
         Player player = new Player(paymentDto.getPlayerId());
@@ -92,6 +94,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         if(paymentDto.isTrophyWin()){
             trophyBonus = paymentDto.getPrice() / 15;
+            trophyBonus = Double.parseDouble(df.format(trophyBonus));
             map.put("Trophy bonus :" , trophyBonus);
         }
 
