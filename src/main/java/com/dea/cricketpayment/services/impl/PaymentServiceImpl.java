@@ -99,6 +99,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
 
         totalPayment = wage + bonus + trophyBonus;
+        totalPayment = Double.parseDouble(df.format(totalPayment));
 
         paymentHistory.setPlayer(player);
         paymentHistory.setBonus(bonus);
